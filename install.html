@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation &#8212; acbs 20200707 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Director’s Cut (DX) Version" href="dx.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="get-started">
+<h2>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+<p>ACBS could be deployed in any appropriate directories, and is invoked by calling
+<code class="docutils literal notranslate"><span class="pre">acbs-build.py</span></code> (you may create a symlink for your convenience). You need to install
+all the <a class="reference internal" href="#mandatory-dependencies">mandatory dependencies</a> listed below. You may want to create a configuration
+file before using ACBS, although this is not a must, but it is highly recommended though.</p>
+<p>You can use package manager to install it if you are running AOSC OS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">acbs</span>
+</pre></div>
+</div>
+<p>Or you can get it from source: <a class="reference external" href="https://github.com/AOSC-Dev/acbs/">https://github.com/AOSC-Dev/acbs/</a>
+If you don’t want to clone it using <code class="docutils literal notranslate"><span class="pre">git</span></code>, you can directly download it: <a class="reference external" href="https://github.com/AOSC-Dev/acbs/archive/staging.zip">https://github.com/AOSC-Dev/acbs/archive/staging.zip</a></p>
+<hr class="docutils" />
+<p>ACBS uses an INI-like configuration defining trees to be used, the
+configuration file should be stored in <code class="docutils literal notranslate"><span class="pre">/etc/acbs/forest.conf</span></code>.</p>
+<p>More detailed instructions are listed below.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p id="mandatory-dependencies">Mandatory dependencies:</p>
+<ul class="simple">
+<li><p>Python 3 (&gt;= 3.6): Running the program itself.</p></li>
+<li><p>GNU File (libmagic): File type detection.</p></li>
+<li><p>LibArchive (bsdtar): Archive handling.</p></li>
+<li><p>GNU Wget or Aria2: Source downloading.</p></li>
+<li><p><a class="reference external" href="https://github.com/AOSC-Dev/autobuild3">Autobuild3</a>: Package building.</p></li>
+</ul>
+<p id="optional-dependencies">Optional dependencies <a class="footnote-reference brackets" href="#id2" id="id1">1</a>:</p>
+<ul class="simple">
+<li><p>libmagic: Python module to detect file type.</p></li>
+<li><p>pycryptodome: Python module to verify file checksums.</p></li>
+<li><p>pexpect: Python module to simulate PTY sessions and log output to file.</p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Note: By installing optional dependencies, functionalities of ACBS could be enhanced. These dependencies are available on PyPI.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="initial-configurations">
+<h2>Initial configurations<a class="headerlink" href="#initial-configurations" title="Permalink to this headline">¶</a></h2>
+<p>The configuration file located in <code class="docutils literal notranslate"><span class="pre">/etc/acbs/forest.conf</span></code> is a INI-like file.</p>
+<p>A bare-minimum configuration example is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">default</span><span class="p">]</span>
+<span class="n">location</span> <span class="o">=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">acbs</span><span class="o">/</span><span class="n">repo</span>
+</pre></div>
+</div>
+<p>If you are feeling smart, variable substitutions are also supported:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[vars]
+base = /mnt
+
+[default]
+location = ${vars:base}/aosc-os-abbs
+</pre></div>
+</div>
+<p>By default, ACBS builds packages from the tree defined in the <code class="docutils literal notranslate"><span class="pre">[default]</span></code> block. You can override this
+behavior by using <code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">&lt;tree</span> <span class="pre">name&gt;</span></code> parameter.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">acbs</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#get-started">Get Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initial-configurations">Initial configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dx.html">Director’s Cut (DX) Version</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">ACBS API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spec_format.html">Specification Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="intro.html" title="previous chapter">Introduction</a></li>
+      <li>Next: <a href="dx.html" title="next chapter">Director’s Cut (DX) Version</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2020, AOSC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/install.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specification Files &#8212; acbs 20200707 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Appendix" href="appendix.html" />
+    <link rel="prev" title="ACBS API Reference" href="api.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="specification-files">
+<h1>Specification Files<a class="headerlink" href="#specification-files" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="defines">
+<h2>defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h2>
+<p>Defines files are expected to exist in <code class="docutils literal notranslate"><span class="pre">:/autobuild/</span></code>. <code class="docutils literal notranslate"><span class="pre">defines</span></code> files are usually
+processed by <code class="docutils literal notranslate"><span class="pre">autobuild</span></code> script, however <code class="docutils literal notranslate"><span class="pre">acbs</span></code> also use this file to determine
+the building order of a given set of packages.</p>
+<p><code class="docutils literal notranslate"><span class="pre">defines</span></code> file MUST contain the following variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PKGNAME</span></code> The name of the package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PKGSEC</span></code>  The section/group/”genre” of the package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PKGDES</span></code>  The brief description of the package</p></li>
+</ul>
+<p>This file may also include the following variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PKGDEP</span></code>   The mandatory runtime requirements/dependencies</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BUILDDEP</span></code> The mandatory compile-time requirements/dependencies</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PKGRECOM</span></code> The optional runtime requirements/dependencies (for enhancing UX or add new features)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EPOCH</span></code>    The epoch version number of the package</p></li>
+</ul>
+<p>This file might also include <code class="docutils literal notranslate"><span class="pre">autobuild</span></code> specific controlling values.
+Consult <a class="reference external" href="https://wiki.aosc.io/en/dev-sys-defines">Autobuild3</a> for more information.</p>
+</div>
+<div class="section" id="spec">
+<h2>spec<a class="headerlink" href="#spec" title="Permalink to this headline">¶</a></h2>
+<p>Defines files are expected to exist in <code class="docutils literal notranslate"><span class="pre">:/</span></code> (root of the top project folder).
+<code class="docutils literal notranslate"><span class="pre">defines</span></code> files are solely processed by <code class="docutils literal notranslate"><span class="pre">acbs</span></code> to fetch source files and control
+<code class="docutils literal notranslate"><span class="pre">acbs</span></code> how to transfer controls to <code class="docutils literal notranslate"><span class="pre">autobuild</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">spec</span></code> file MUST contain the following variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VER</span></code>  The version of the package, it might be not in semantic versioning scheme.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">spec</span></code> file SHOULD ONLY contain ONE of the following variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DUMMYSRC</span></code> (Bool)   If set to 1, indicates this package does not require source files or source files processing cannot be handled well by current version of <code class="docutils literal notranslate"><span class="pre">acbs</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SRCTBL</span></code>   (String) If set, indicates this package requires “zipped” or archived source files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;VCS_NAME&gt;SRC</span></code>     If set, indicates required source files for this package are in a version controlled repository. (For a list of supported VCS systems, see <a class="reference internal" href="appendix.html"><span class="doc">Appendix</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CHKSUM</span></code> Expected format: <code class="docutils literal notranslate"><span class="pre">&lt;ALGO_NAME&gt;::&lt;HASH_VALUE&gt;</span></code> If set, <code class="docutils literal notranslate"><span class="pre">acbs</span></code> will check the checksum of the source file against this value can be omitted if the source is from VCS.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">spec</span></code> file may also contain the following variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;VCS_NAME&gt;BRCH</span></code>    If set, indicates required branch of the repository for the package.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;VCS_NAME&gt;COMMIT</span></code>  If set, indicates required commit/revision of the repository for the package.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SUBDIR</span></code> If set, <code class="docutils literal notranslate"><span class="pre">acbs</span></code> will change to specified directory after finishing preparing the source files. (For a list of supported hashing algorithms, see <a class="reference internal" href="appendix.html"><span class="doc">Appendix</span></a>)</p></li>
+</ul>
+<p>Multiple source files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SRCS</span></code> Expected format: <code class="docutils literal notranslate"><span class="pre">&lt;VCS_NAME_1&gt;::&lt;OPTIONS_1&gt;::&lt;URI_1&gt;</span> <span class="pre">&lt;VCS_NAME_2&gt;::&lt;URI_2&gt;</span> <span class="pre">...</span></code> See footnote <a class="footnote-reference brackets" href="#id3" id="id1">1</a> for details about particular behavior.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CHKSUMS</span></code> Expected format: <code class="docutils literal notranslate"><span class="pre">&lt;ALGO_NAME_1&gt;::&lt;HASH_VALUE_1&gt;</span> <span class="pre">&lt;ALGO_NAME_2&gt;::&lt;HASH_VALUE_2&gt;</span> <span class="pre">...</span></code> If set, <code class="docutils literal notranslate"><span class="pre">acbs</span></code> will check the checksum of the source files against this value not available if the source is from VCS. <a class="footnote-reference brackets" href="#id4" id="id2">2</a></p></li>
+</ul>
+<p>Details about the <code class="docutils literal notranslate"><span class="pre">SRCS</span></code> format:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Each source specification in the array accepts one, two or three parameters:</dt><dd><ol class="arabic simple">
+<li><p>One parameter only: <code class="docutils literal notranslate"><span class="pre">&lt;URL&gt;</span></code></p></li>
+<li><p>Two parameters: <code class="docutils literal notranslate"><span class="pre">&lt;VCS_NAME&gt;::&lt;URL&gt;</span></code></p></li>
+<li><p>Three parameters: <code class="docutils literal notranslate"><span class="pre">&lt;VCS_NAME&gt;::&lt;OPTIONS&gt;::&lt;URL&gt;</span></code></p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Currently supported options:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">branch</span></code>: Name of the branch</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">commit</span></code>: Commit hash</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rename</span></code>: Rename the source file (including extension name if any)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Example: <code class="docutils literal notranslate"><span class="pre">SRCS='git::git://github.com/AOSC-Dev/acbs</span> <span class="pre">git::https://github.com/AOSC-Dev/acbs'</span></code> This will make <code class="docutils literal notranslate"><span class="pre">acbs</span></code> to download two sets of source files</p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Example: <code class="docutils literal notranslate"><span class="pre">CHKSUMS='sha1::a9c55882c935300bec93e209f1ec8a21f75638b7</span> <span class="pre">sha256::4ccdbbd95d4aef058502c8ee07b1abb490f5ef4a4d6ff711440facd0b8eded33'</span></code> This will make <code class="docutils literal notranslate"><span class="pre">acbs</span></code> to check two sets of source files</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">acbs</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dx.html">Director’s Cut (DX) Version</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">ACBS API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Specification Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#defines">defines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spec">spec</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api.html" title="previous chapter">ACBS API Reference</a></li>
+      <li>Next: <a href="appendix.html" title="next chapter">Appendix</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2020, AOSC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/spec_format.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

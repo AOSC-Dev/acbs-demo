@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Director’s Cut (DX) Version &#8212; acbs 20200707 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ACBS API Reference" href="api.html" />
+    <link rel="prev" title="Installation" href="install.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="director-s-cut-dx-version">
+<h1>Director’s Cut (DX) Version<a class="headerlink" href="#director-s-cut-dx-version" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>As it was shown in the introduction, ACBS was meant to replace the original ABBS utility with better
+reliability and functionalities. However, later it was clear that ACBS itself was riddled with numerous
+bugs and issues.</p>
+<p>After years of disrepair, the original ACBS was apparently beyond repair. Although the members of the
+AOSC community were getting used to the workarounds and quirks of ACBS, a better solution was still
+much desired.</p>
+<p>The original author, liushuyu, decided to face on the challenge. It took him what feels like three months
+to complete the rewrite, and the result is then the DX version.</p>
+</div>
+<div class="section" id="version-number">
+<h2>Version Number<a class="headerlink" href="#version-number" title="Permalink to this headline">¶</a></h2>
+<p>The DX version still uses the same version schema as the original. The first release of the DX version is
+version <code class="docutils literal notranslate"><span class="pre">20200615</span></code>.</p>
+</div>
+<div class="section" id="behavioral-changes">
+<h2>Behavioral Changes<a class="headerlink" href="#behavioral-changes" title="Permalink to this headline">¶</a></h2>
+<p>Since the DX version is a complete re-implementation, there are some changes to its behaviors:</p>
+<ol class="arabic simple">
+<li><p><strong>Dependency resolution:</strong> The original version uses a dumb algorithm, which will spawn a new thread to build the dependent package before the package you requested. The new version will use the Tarjan search algorithm to determine what and in which order the dependencies should be built in advance.</p></li>
+<li><p><strong>Parser:</strong> The original version uses bash itself to parse the build files. This is proven to be unreliable. The new version uses <code class="docutils literal notranslate"><span class="pre">bashvar.py</span></code> from <code class="docutils literal notranslate"><span class="pre">abbs-meta</span></code>.</p></li>
+<li><p><strong>Source fetching:</strong> The new version now name the source files using their checksum hashes to avoid name collisions. The Git repository is now fetched using the “bare repository” mode, and during the checkout phase, the repository is checked out using “detached” mode. In this case, the <code class="docutils literal notranslate"><span class="pre">.git</span></code> folder will not exist in the build directory.</p></li>
+<li><p><strong>Overall reliability:</strong> The new version now uses type checking to ensure basic stability. No type errors are allowed to pass through under the newly set up CI system.</p></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">acbs</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Director’s Cut (DX) Version</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-number">Version Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#behavioral-changes">Behavioral Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">ACBS API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spec_format.html">Specification Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="install.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="api.html" title="next chapter">ACBS API Reference</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2020, AOSC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/dx.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

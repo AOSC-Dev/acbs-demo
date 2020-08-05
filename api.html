@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACBS API Reference &#8212; acbs 20200707 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Specification Files" href="spec_format.html" />
+    <link rel="prev" title="Director’s Cut (DX) Version" href="dx.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="acbs-api-reference">
+<h1>ACBS API Reference<a class="headerlink" href="#acbs-api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="acbs-base">
+<h2>ACBS base<a class="headerlink" href="#acbs-base" title="Permalink to this headline">¶</a></h2>
+<p>ACBS base contains basic data structures.</p>
+<dl class="py class">
+<dt id="acbs.base.ACBSSourceInfo">
+<em class="property">class </em><code class="sig-prename descclassname">acbs.base.</code><code class="sig-name descname">ACBSSourceInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">url</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">revision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">branch</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">depth</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#acbs.base.ACBSSourceInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt id="acbs.base.ACBSPackageInfo">
+<em class="property">class </em><code class="sig-prename descclassname">acbs.base.</code><code class="sig-name descname">ACBSPackageInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">deps</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">location</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">source_uri</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#acbs.base.ACBSSourceInfo" title="acbs.base.ACBSSourceInfo">acbs.base.ACBSSourceInfo</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#acbs.base.ACBSPackageInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="acbs-deps">
+<h2>ACBS deps<a class="headerlink" href="#acbs-deps" title="Permalink to this headline">¶</a></h2>
+<p>ACBS deps contains the dependency resolver.</p>
+<span class="target" id="module-acbs.deps"></span><dl class="py function">
+<dt id="acbs.deps.tarjan_search">
+<code class="sig-prename descclassname">acbs.deps.</code><code class="sig-name descname">tarjan_search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packages</span><span class="p">:</span> <span class="n">OrderedDict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span>ACBSPackageInfo<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">search_path</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="#acbs.base.ACBSPackageInfo" title="acbs.base.ACBSPackageInfo">acbs.base.ACBSPackageInfo</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#acbs.deps.tarjan_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function describes a Tarjan’s strongly connected components algorithm.
+The resulting list of ACBSPackageInfo are sorted topologically as a byproduct of the algorithm</p>
+</dd></dl>
+
+</div>
+<div class="section" id="acbs-utils">
+<h2>ACBS utils<a class="headerlink" href="#acbs-utils" title="Permalink to this headline">¶</a></h2>
+<p>ACBS utils contains some helper functions to perform some tasks easier.</p>
+<span class="target" id="module-acbs.utils"></span><dl class="py class">
+<dt id="acbs.utils.ACBSLogFormatter">
+<em class="property">class </em><code class="sig-prename descclassname">acbs.utils.</code><code class="sig-name descname">ACBSLogFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fmt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">datefmt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">'%'</span></em>, <em class="sig-param"><span class="n">validate</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#acbs.utils.ACBSLogFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABBS-like format logger formatter class</p>
+<dl class="py method">
+<dt id="acbs.utils.ACBSLogFormatter.format">
+<code class="sig-name descname">format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="headerlink" href="#acbs.utils.ACBSLogFormatter.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the specified record as text.</p>
+<p>The record’s attribute dictionary is used as the operand to a
+string formatting operation which yields the returned string.
+Before formatting the dictionary, a couple of preparatory steps
+are carried out. The message attribute of the record is computed
+using LogRecord.getMessage(). If the formatting string uses the
+time (as determined by a call to usesTime(), formatTime() is
+called to format the event time. If there is exception information,
+it is formatted using formatException() and appended to the message.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="acbs.utils.full_line_banner">
+<code class="sig-prename descclassname">acbs.utils.</code><code class="sig-name descname">full_line_banner</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">char</span><span class="o">=</span><span class="default_value">'-'</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="headerlink" href="#acbs.utils.full_line_banner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a full line banner with customizable texts</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> – message you want to be printed</p></li>
+<li><p><strong>char</strong> – character to use to fill the banner</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="acbs.utils.get_arch_name">
+<code class="sig-prename descclassname">acbs.utils.</code><code class="sig-name descname">get_arch_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span><a class="headerlink" href="#acbs.utils.get_arch_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detect architecture of the host machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>architecture name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="acbs.utils.guess_extension_name">
+<code class="sig-prename descclassname">acbs.utils.</code><code class="sig-name descname">guess_extension_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="headerlink" href="#acbs.utils.guess_extension_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Guess extension name based on filename</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> – name of the file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>possible extension name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="acbs.utils.human_time">
+<code class="sig-prename descclassname">acbs.utils.</code><code class="sig-name descname">human_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">full_seconds</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="headerlink" href="#acbs.utils.human_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert time span (in seconds) to more friendly format
+:param seconds: Time span in seconds (decimal is acceptable)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="acbs.utils.print_package_names">
+<code class="sig-prename descclassname">acbs.utils.</code><code class="sig-name descname">print_package_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packages</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#acbs.base.ACBSPackageInfo" title="acbs.base.ACBSPackageInfo">acbs.base.ACBSPackageInfo</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">limit</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="headerlink" href="#acbs.utils.print_package_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print out the names of packages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>packages</strong> – list of ACBSPackageInfo objects</p></li>
+<li><p><strong>limit</strong> – maximum number of packages to print</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a string containing the names of the packages</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">acbs</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dx.html">Director’s Cut (DX) Version</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ACBS API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#acbs-base">ACBS base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acbs-deps">ACBS deps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acbs-utils">ACBS utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spec_format.html">Specification Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="dx.html" title="previous chapter">Director’s Cut (DX) Version</a></li>
+      <li>Next: <a href="spec_format.html" title="next chapter">Specification Files</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016-2020, AOSC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

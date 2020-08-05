@@ -1,0 +1,40 @@
+[
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-pthread",
+            "-Wno-unused-result",
+            "-Wsign-compare",
+            "-DNDEBUG",
+            "-g",
+            "-fwrapv",
+            "-O3",
+            "-Wall",
+            "-march=x86-64",
+            "-mtune=generic",
+            "-O3",
+            "-pipe",
+            "-fno-plt",
+            "-fno-semantic-interposition",
+            "-march=x86-64",
+            "-mtune=generic",
+            "-O3",
+            "-pipe",
+            "-fno-plt",
+            "-march=x86-64",
+            "-mtune=generic",
+            "-O3",
+            "-pipe",
+            "-fno-plt",
+            "-fPIC",
+            "-I/usr/lib/python3.8/site-packages/pybind11/include",
+            "-I/usr/include/python3.8",
+            "-o",
+            "build/temp.linux-x86_64-3.8/src/miniapt-query.o",
+            "src/miniapt-query.cc"
+        ],
+        "directory": "/home/liushuyu/Development/acbs-demo",
+        "file": "src/miniapt-query.cc"
+    }
+]
