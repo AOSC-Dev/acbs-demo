@@ -33,14 +33,19 @@ int check_available(const char *name)
     policy = cachefile.GetPolicy();
     if (!policy)
         return -3;
+    if (cachefile->BrokenCount() > 0)
+        return -4;
 
     APT::CacheSetHelper helper(true, GlobalError::NOTICE);
     const char *list[2] = {name, NULL};
     APT::PackageList pkgset = APT::PackageList::FromCommandLine(cachefile, list, helper);
     for (APT::PackageList::const_iterator Pkg = pkgset.begin(); Pkg != pkgset.end(); ++Pkg)
     {
-        if (depCache->GetCandidateVersion(Pkg))
-            return 1;
+        if (depCache->GetCandidateVersion(Pkg)) {
+            if (depCache->MarkInstall(Pkg, true, 0, true)) {
+                return 1;
+            }
+        }
     }
     return 0;
 }

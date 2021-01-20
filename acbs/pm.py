@@ -79,12 +79,7 @@ def check_if_available(name: str) -> bool:
         return cached
     if use_native_bindings:
         logging.debug('... using libapt-pkg')
-        try:
-            if apt_check_if_available(name) != 1:
-                return False
-            subprocess.check_output(
-                ['apt-get', 'install', '-s', name], stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError:
+        if apt_check_if_available(name) != 1:
             return False
     try:
         subprocess.check_output(
